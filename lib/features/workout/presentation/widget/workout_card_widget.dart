@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_tracker/features/workout/presentation/cubit/workout_list_screen_cubit.dart';
 
 import '../../domain/workout_model.dart';
 
