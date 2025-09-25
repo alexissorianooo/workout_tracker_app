@@ -69,7 +69,10 @@ class CardItem extends StatelessWidget {
             Text('Notes:', style: TextStyle(fontWeight: FontWeight.bold)),
             TextField(
               controller: TextEditingController(text: workoutModel.notes),
-              decoration: const InputDecoration(border: OutlineInputBorder()),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                isDense: true,
+              ),
               maxLines: null,
             ),
           ],
