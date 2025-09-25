@@ -8,8 +8,8 @@ class WorkoutLocalStorage {
   Id id = Isar.autoIncrement;
 
   String? name;
-  int? latestWeight;
-  int? personalRecordWeight;
+  double? latestWeight;
+  double? personalRecordWeight;
   int? repetitions;
   String? notes;
 }

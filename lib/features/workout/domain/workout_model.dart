@@ -8,8 +8,8 @@ part 'workout_model.g.dart';
 class WorkoutModel with _$WorkoutModel {
   const factory WorkoutModel({
     required String name,
-    required int latestWeight,
-    required int personalRecordWeight,
+    required double latestWeight,
+    required double personalRecordWeight,
     required int repetitions,
     String? notes,
   }) = _WorkoutModel;

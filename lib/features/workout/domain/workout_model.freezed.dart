@@ -22,8 +22,8 @@ WorkoutModel _$WorkoutModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WorkoutModel {
   String get name => throw _privateConstructorUsedError;
-  int get latestWeight => throw _privateConstructorUsedError;
-  int get personalRecordWeight => throw _privateConstructorUsedError;
+  double get latestWeight => throw _privateConstructorUsedError;
+  double get personalRecordWeight => throw _privateConstructorUsedError;
   int get repetitions => throw _privateConstructorUsedError;
   String? get notes => throw _privateConstructorUsedError;
 
@@ -46,8 +46,8 @@ abstract class $WorkoutModelCopyWith<$Res> {
   @useResult
   $Res call({
     String name,
-    int latestWeight,
-    int personalRecordWeight,
+    double latestWeight,
+    double personalRecordWeight,
     int repetitions,
     String? notes,
   });
@@ -83,11 +83,11 @@ class _$WorkoutModelCopyWithImpl<$Res, $Val extends WorkoutModel>
             latestWeight: null == latestWeight
                 ? _value.latestWeight
                 : latestWeight // ignore: cast_nullable_to_non_nullable
-                      as int,
+                      as double,
             personalRecordWeight: null == personalRecordWeight
                 ? _value.personalRecordWeight
                 : personalRecordWeight // ignore: cast_nullable_to_non_nullable
-                      as int,
+                      as double,
             repetitions: null == repetitions
                 ? _value.repetitions
                 : repetitions // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ abstract class _$$WorkoutModelImplCopyWith<$Res>
   @useResult
   $Res call({
     String name,
-    int latestWeight,
-    int personalRecordWeight,
+    double latestWeight,
+    double personalRecordWeight,
     int repetitions,
     String? notes,
   });
@@ -149,11 +149,11 @@ class __$$WorkoutModelImplCopyWithImpl<$Res>
         latestWeight: null == latestWeight
             ? _value.latestWeight
             : latestWeight // ignore: cast_nullable_to_non_nullable
-                  as int,
+                  as double,
         personalRecordWeight: null == personalRecordWeight
             ? _value.personalRecordWeight
             : personalRecordWeight // ignore: cast_nullable_to_non_nullable
-                  as int,
+                  as double,
         repetitions: null == repetitions
             ? _value.repetitions
             : repetitions // ignore: cast_nullable_to_non_nullable
@@ -184,9 +184,9 @@ class _$WorkoutModelImpl implements _WorkoutModel {
   @override
   final String name;
   @override
-  final int latestWeight;
+  final double latestWeight;
   @override
-  final int personalRecordWeight;
+  final double personalRecordWeight;
   @override
   final int repetitions;
   @override
@@ -240,8 +240,8 @@ class _$WorkoutModelImpl implements _WorkoutModel {
 abstract class _WorkoutModel implements WorkoutModel {
   const factory _WorkoutModel({
     required final String name,
-    required final int latestWeight,
-    required final int personalRecordWeight,
+    required final double latestWeight,
+    required final double personalRecordWeight,
     required final int repetitions,
     final String? notes,
   }) = _$WorkoutModelImpl;
@@ -252,9 +252,9 @@ abstract class _WorkoutModel implements WorkoutModel {
   @override
   String get name;
   @override
-  int get latestWeight;
+  double get latestWeight;
   @override
-  int get personalRecordWeight;
+  double get personalRecordWeight;
   @override
   int get repetitions;
   @override

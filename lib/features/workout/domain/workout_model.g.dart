@@ -9,8 +9,8 @@ part of 'workout_model.dart';
 _$WorkoutModelImpl _$$WorkoutModelImplFromJson(Map<String, dynamic> json) =>
     _$WorkoutModelImpl(
       name: json['name'] as String,
-      latestWeight: (json['latestWeight'] as num).toInt(),
-      personalRecordWeight: (json['personalRecordWeight'] as num).toInt(),
+      latestWeight: (json['latestWeight'] as num).toDouble(),
+      personalRecordWeight: (json['personalRecordWeight'] as num).toDouble(),
       repetitions: (json['repetitions'] as num).toInt(),
       notes: json['notes'] as String?,
     );

@@ -21,14 +21,14 @@ const WorkoutLocalStorageSchema = CollectionSchema(
     r'latestWeight': PropertySchema(
       id: 0,
       name: r'latestWeight',
-      type: IsarType.long,
+      type: IsarType.double,
     ),
     r'name': PropertySchema(id: 1, name: r'name', type: IsarType.string),
     r'notes': PropertySchema(id: 2, name: r'notes', type: IsarType.string),
     r'personalRecordWeight': PropertySchema(
       id: 3,
       name: r'personalRecordWeight',
-      type: IsarType.long,
+      type: IsarType.double,
     ),
     r'repetitions': PropertySchema(
       id: 4,
@@ -79,10 +79,10 @@ void _workoutLocalStorageSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeLong(offsets[0], object.latestWeight);
+  writer.writeDouble(offsets[0], object.latestWeight);
   writer.writeString(offsets[1], object.name);
   writer.writeString(offsets[2], object.notes);
-  writer.writeLong(offsets[3], object.personalRecordWeight);
+  writer.writeDouble(offsets[3], object.personalRecordWeight);
   writer.writeLong(offsets[4], object.repetitions);
 }
 
@@ -94,10 +94,10 @@ WorkoutLocalStorage _workoutLocalStorageDeserialize(
 ) {
   final object = WorkoutLocalStorage();
   object.id = id;
-  object.latestWeight = reader.readLongOrNull(offsets[0]);
+  object.latestWeight = reader.readDoubleOrNull(offsets[0]);
   object.name = reader.readStringOrNull(offsets[1]);
   object.notes = reader.readStringOrNull(offsets[2]);
-  object.personalRecordWeight = reader.readLongOrNull(offsets[3]);
+  object.personalRecordWeight = reader.readDoubleOrNull(offsets[3]);
   object.repetitions = reader.readLongOrNull(offsets[4]);
   return object;
 }
@@ -110,13 +110,13 @@ P _workoutLocalStorageDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 1:
       return (reader.readStringOrNull(offset)) as P;
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 4:
       return (reader.readLongOrNull(offset)) as P;
     default:
@@ -302,35 +302,52 @@ extension WorkoutLocalStorageQueryFilter
   }
 
   QueryBuilder<WorkoutLocalStorage, WorkoutLocalStorage, QAfterFilterCondition>
-  latestWeightEqualTo(int? value) {
+  latestWeightEqualTo(double? value, {double epsilon = Query.epsilon}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
-        FilterCondition.equalTo(property: r'latestWeight', value: value),
-      );
-    });
-  }
-
-  QueryBuilder<WorkoutLocalStorage, WorkoutLocalStorage, QAfterFilterCondition>
-  latestWeightGreaterThan(int? value, {bool include = false}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(
-        FilterCondition.greaterThan(
-          include: include,
+        FilterCondition.equalTo(
           property: r'latestWeight',
           value: value,
+
+          epsilon: epsilon,
         ),
       );
     });
   }
 
   QueryBuilder<WorkoutLocalStorage, WorkoutLocalStorage, QAfterFilterCondition>
-  latestWeightLessThan(int? value, {bool include = false}) {
+  latestWeightGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'latestWeight',
+          value: value,
+
+          epsilon: epsilon,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<WorkoutLocalStorage, WorkoutLocalStorage, QAfterFilterCondition>
+  latestWeightLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.lessThan(
           include: include,
           property: r'latestWeight',
           value: value,
+
+          epsilon: epsilon,
         ),
       );
     });
@@ -338,10 +355,11 @@ extension WorkoutLocalStorageQueryFilter
 
   QueryBuilder<WorkoutLocalStorage, WorkoutLocalStorage, QAfterFilterCondition>
   latestWeightBetween(
-    int? lower,
-    int? upper, {
+    double? lower,
+    double? upper, {
     bool includeLower = true,
     bool includeUpper = true,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
@@ -351,6 +369,8 @@ extension WorkoutLocalStorageQueryFilter
           includeLower: includeLower,
           upper: upper,
           includeUpper: includeUpper,
+
+          epsilon: epsilon,
         ),
       );
     });
@@ -693,38 +713,52 @@ extension WorkoutLocalStorageQueryFilter
   }
 
   QueryBuilder<WorkoutLocalStorage, WorkoutLocalStorage, QAfterFilterCondition>
-  personalRecordWeightEqualTo(int? value) {
+  personalRecordWeightEqualTo(double? value, {double epsilon = Query.epsilon}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.equalTo(
           property: r'personalRecordWeight',
           value: value,
+
+          epsilon: epsilon,
         ),
       );
     });
   }
 
   QueryBuilder<WorkoutLocalStorage, WorkoutLocalStorage, QAfterFilterCondition>
-  personalRecordWeightGreaterThan(int? value, {bool include = false}) {
+  personalRecordWeightGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.greaterThan(
           include: include,
           property: r'personalRecordWeight',
           value: value,
+
+          epsilon: epsilon,
         ),
       );
     });
   }
 
   QueryBuilder<WorkoutLocalStorage, WorkoutLocalStorage, QAfterFilterCondition>
-  personalRecordWeightLessThan(int? value, {bool include = false}) {
+  personalRecordWeightLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
         FilterCondition.lessThan(
           include: include,
           property: r'personalRecordWeight',
           value: value,
+
+          epsilon: epsilon,
         ),
       );
     });
@@ -732,10 +766,11 @@ extension WorkoutLocalStorageQueryFilter
 
   QueryBuilder<WorkoutLocalStorage, WorkoutLocalStorage, QAfterFilterCondition>
   personalRecordWeightBetween(
-    int? lower,
-    int? upper, {
+    double? lower,
+    double? upper, {
     bool includeLower = true,
     bool includeUpper = true,
+    double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(
@@ -745,6 +780,8 @@ extension WorkoutLocalStorageQueryFilter
           includeLower: includeLower,
           upper: upper,
           includeUpper: includeUpper,
+
+          epsilon: epsilon,
         ),
       );
     });
@@ -1046,7 +1083,7 @@ extension WorkoutLocalStorageQueryProperty
     });
   }
 
-  QueryBuilder<WorkoutLocalStorage, int?, QQueryOperations>
+  QueryBuilder<WorkoutLocalStorage, double?, QQueryOperations>
   latestWeightProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'latestWeight');
@@ -1065,7 +1102,7 @@ extension WorkoutLocalStorageQueryProperty
     });
   }
 
-  QueryBuilder<WorkoutLocalStorage, int?, QQueryOperations>
+  QueryBuilder<WorkoutLocalStorage, double?, QQueryOperations>
   personalRecordWeightProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'personalRecordWeight');
