@@ -13,78 +13,88 @@ class WorkoutCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          title: Text(workout.name),
-          subtitle: Column(children: [
-              
-            ],
-          ),
-        ),
-        // if (workout.notes != null)
-        //   Padding(
-        //     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        //     child: Align(
-        //       alignment: Alignment.centerLeft,
-        //       child: Column(
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         children: [
-        //           const Text('Notes:'),
-        //           const SizedBox(height: 4.0),
-        //           Container(
-        //             padding: const EdgeInsets.all(12),
-        //             decoration: BoxDecoration(
-        //               border: Border.all(color: Colors.grey),
-        //               borderRadius: BorderRadius.circular(4.0),
-        //             ),
-        //             child: TextField(
-        //               onChanged: (value) {
-        //                 context.read<WorkoutListScreenCubit>().editNotes(index);
-        //               },
-        //               decoration: InputDecoration(
-        //                 border: InputBorder.none,
-        //                 hintText: workout.notes,
-        //               ),
-        //               maxLines: 3,
-        //             ),
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-        //   ),
-        const Divider(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(children: [CardItem(workoutModel: workout)]),
     );
   }
 }
 
 class CardItem extends StatelessWidget {
-  final String itemLabel;
-  final int itemValue;
-  const CardItem({super.key, required this.itemValue, required this.itemLabel});
+  final WorkoutModel workoutModel;
+  const CardItem({super.key, required this.workoutModel});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-      child: SizedBox(
-        height: 30,
-        child: Row(
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('$itemLabel: '),
-            Expanded(
-              child: TextField(
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: itemValue.toString(),
+            Text(
+              workoutModel.name,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            Divider(color: Colors.grey[300], thickness: 1),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                workoutDetails(
+                  'PR',
+                  workoutModel.personalRecordWeight.toString(),
                 ),
-                maxLines: 1,
-              ),
+                workoutDetails(
+                  'Recent weight',
+                  workoutModel.latestWeight.toString(),
+                ),
+                workoutDetails(
+                  'Repetitions',
+                  workoutModel.repetitions.toString(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text('Notes:', style: TextStyle(fontWeight: FontWeight.bold)),
+            TextField(
+              controller: TextEditingController(text: workoutModel.notes),
+              decoration: const InputDecoration(border: OutlineInputBorder()),
+              maxLines: null,
             ),
           ],
         ),
       ),
     );
   }
+}
+
+// TODO: make this stateless widget for performance
+Widget workoutDetails(String label, String value) {
+  return Expanded(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(label),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(4.0),
+          ),
+          child: TextField(
+            controller: TextEditingController(text: value),
+            maxLines: 1,
+            textAlign: TextAlign.center,
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              isDense: true,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }

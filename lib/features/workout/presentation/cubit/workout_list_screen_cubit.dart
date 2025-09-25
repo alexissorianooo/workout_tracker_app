@@ -14,10 +14,20 @@ class WorkoutListScreenCubit extends Cubit<WorkoutListScreenState> {
   Future<void> initialize() async {
     // Simulate loading data
     await Future.delayed(const Duration(seconds: 2));
+    workouts = [
+      WorkoutModel(
+        name: 'Bench press',
+        personalRecordWeight: 32,
+        latestWeight: 30,
+        repetitions: 12,
+        notes: 'Felt great!',
+      ),
+    ];
     if (workouts.isEmpty) {
       emit(const WorkoutListScreenState.empty());
       return;
     }
+
     emit(WorkoutListScreenState.loaded(workouts));
   }
 
