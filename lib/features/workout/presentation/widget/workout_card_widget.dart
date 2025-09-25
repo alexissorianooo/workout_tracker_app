@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_tracker/features/workout/presentation/widget/workout_card_details_widget.dart';
 
 import '../../domain/workout_model.dart';
 
@@ -36,25 +37,31 @@ class CardItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              workoutModel.name,
+            TextField(
+              controller: TextEditingController(text: workoutModel.name),
+              maxLines: 1,
+              textAlign: TextAlign.start,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                isDense: true,
+              ),
             ),
             Divider(color: Colors.grey[300], thickness: 1),
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                workoutDetails(
-                  'PR',
-                  workoutModel.personalRecordWeight.toString(),
+                WorkoutCardDetailsWidget(
+                  label: 'PR',
+                  value: workoutModel.personalRecordWeight.toString(),
                 ),
-                workoutDetails(
-                  'Recent weight',
-                  workoutModel.latestWeight.toString(),
+                WorkoutCardDetailsWidget(
+                  label: 'Recent weight',
+                  value: workoutModel.latestWeight.toString(),
                 ),
-                workoutDetails(
-                  'Repetitions',
-                  workoutModel.repetitions.toString(),
+                WorkoutCardDetailsWidget(
+                  label: 'Repetitions',
+                  value: workoutModel.repetitions.toString(),
                 ),
               ],
             ),
@@ -70,31 +77,4 @@ class CardItem extends StatelessWidget {
       ),
     );
   }
-}
-
-// TODO: make this stateless widget for performance
-Widget workoutDetails(String label, String value) {
-  return Expanded(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Text(label),
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(4.0),
-          ),
-          child: TextField(
-            controller: TextEditingController(text: value),
-            maxLines: 1,
-            textAlign: TextAlign.center,
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-              isDense: true,
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
 }
