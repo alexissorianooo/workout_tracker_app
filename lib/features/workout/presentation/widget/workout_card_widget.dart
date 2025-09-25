@@ -15,7 +15,7 @@ class WorkoutCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 24.0),
       child: Column(children: [CardItem(workoutModel: workout)]),
     );
   }
