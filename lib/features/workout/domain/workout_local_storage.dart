@@ -19,6 +19,7 @@ extension WorkoutLocalStorageConverter on WorkoutLocalStorage {
   /// Convert WorkoutLocalStorage to WorkoutModel
   WorkoutModel toModel() {
     return WorkoutModel(
+      id: id,
       name: name ?? '',
       latestWeight: latestWeight ?? 0,
       personalRecordWeight: personalRecordWeight ?? 0,

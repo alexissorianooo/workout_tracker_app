@@ -7,6 +7,6 @@ import 'injection.config.dart';
 final GetIt serviceLocator = GetIt.instance;
 
 @InjectableInit(preferRelativeImports: true)
-void initDependencyInjection(String env) {
-  serviceLocator.init(environment: env);
+void initDependencyInjection() {
+  serviceLocator.init();
 }

@@ -21,6 +21,7 @@ WorkoutModel _$WorkoutModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WorkoutModel {
+  int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   double get latestWeight => throw _privateConstructorUsedError;
   double get personalRecordWeight => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $WorkoutModelCopyWith<$Res> {
   ) = _$WorkoutModelCopyWithImpl<$Res, WorkoutModel>;
   @useResult
   $Res call({
+    int? id,
     String name,
     double latestWeight,
     double personalRecordWeight,
@@ -68,6 +70,7 @@ class _$WorkoutModelCopyWithImpl<$Res, $Val extends WorkoutModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
     Object? latestWeight = null,
     Object? personalRecordWeight = null,
@@ -76,6 +79,10 @@ class _$WorkoutModelCopyWithImpl<$Res, $Val extends WorkoutModel>
   }) {
     return _then(
       _value.copyWith(
+            id: freezed == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as int?,
             name: null == name
                 ? _value.name
                 : name // ignore: cast_nullable_to_non_nullable
@@ -112,6 +119,7 @@ abstract class _$$WorkoutModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
+    int? id,
     String name,
     double latestWeight,
     double personalRecordWeight,
@@ -134,6 +142,7 @@ class __$$WorkoutModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
     Object? latestWeight = null,
     Object? personalRecordWeight = null,
@@ -142,6 +151,10 @@ class __$$WorkoutModelImplCopyWithImpl<$Res>
   }) {
     return _then(
       _$WorkoutModelImpl(
+        id: freezed == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as int?,
         name: null == name
             ? _value.name
             : name // ignore: cast_nullable_to_non_nullable
@@ -171,6 +184,7 @@ class __$$WorkoutModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WorkoutModelImpl implements _WorkoutModel {
   const _$WorkoutModelImpl({
+    this.id,
     required this.name,
     required this.latestWeight,
     required this.personalRecordWeight,
@@ -181,6 +195,8 @@ class _$WorkoutModelImpl implements _WorkoutModel {
   factory _$WorkoutModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$WorkoutModelImplFromJson(json);
 
+  @override
+  final int? id;
   @override
   final String name;
   @override
@@ -194,7 +210,7 @@ class _$WorkoutModelImpl implements _WorkoutModel {
 
   @override
   String toString() {
-    return 'WorkoutModel(name: $name, latestWeight: $latestWeight, personalRecordWeight: $personalRecordWeight, repetitions: $repetitions, notes: $notes)';
+    return 'WorkoutModel(id: $id, name: $name, latestWeight: $latestWeight, personalRecordWeight: $personalRecordWeight, repetitions: $repetitions, notes: $notes)';
   }
 
   @override
@@ -202,6 +218,7 @@ class _$WorkoutModelImpl implements _WorkoutModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WorkoutModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.latestWeight, latestWeight) ||
                 other.latestWeight == latestWeight) &&
@@ -216,6 +233,7 @@ class _$WorkoutModelImpl implements _WorkoutModel {
   @override
   int get hashCode => Object.hash(
     runtimeType,
+    id,
     name,
     latestWeight,
     personalRecordWeight,
@@ -239,6 +257,7 @@ class _$WorkoutModelImpl implements _WorkoutModel {
 
 abstract class _WorkoutModel implements WorkoutModel {
   const factory _WorkoutModel({
+    final int? id,
     required final String name,
     required final double latestWeight,
     required final double personalRecordWeight,
@@ -249,6 +268,8 @@ abstract class _WorkoutModel implements WorkoutModel {
   factory _WorkoutModel.fromJson(Map<String, dynamic> json) =
       _$WorkoutModelImpl.fromJson;
 
+  @override
+  int? get id;
   @override
   String get name;
   @override

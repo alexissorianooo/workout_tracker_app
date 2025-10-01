@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_tracker/features/workout/presentation/cubit/workout_list_screen_cubit.dart';
 import 'package:workout_tracker/features/workout/presentation/widget/workout_card_details_widget.dart';
 
 import '../../domain/workout_model.dart';
@@ -16,14 +18,39 @@ class WorkoutCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 24.0),
-      child: Column(children: [CardItem(workoutModel: workout)]),
+      child: Column(
+        children: [CardItem(workoutModel: workout, index: index)],
+      ),
     );
   }
 }
 
-class CardItem extends StatelessWidget {
+class CardItem extends StatefulWidget {
   final WorkoutModel workoutModel;
-  const CardItem({super.key, required this.workoutModel});
+  final int index;
+  const CardItem({super.key, required this.workoutModel, required this.index});
+
+  @override
+  State<CardItem> createState() => _CardItemState();
+}
+
+class _CardItemState extends State<CardItem> {
+  late TextEditingController nameController;
+  late TextEditingController notesController;
+
+  @override
+  void initState() {
+    nameController = TextEditingController(text: widget.workoutModel.name);
+    notesController = TextEditingController(text: widget.workoutModel.notes);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    notesController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +65,23 @@ class CardItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              controller: TextEditingController(text: workoutModel.name),
+              controller: nameController,
+              onChanged: (value) {
+                context.read<WorkoutListScreenCubit>().updateName(
+                  widget.index,
+                  value,
+                );
+              },
               maxLines: 1,
               textAlign: TextAlign.start,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 border: InputBorder.none,
                 isDense: true,
+                labelStyle: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Divider(color: Colors.grey[300], thickness: 1),
@@ -53,25 +90,38 @@ class CardItem extends StatelessWidget {
               children: [
                 WorkoutCardDetailsWidget(
                   label: 'PR',
-                  value: workoutModel.personalRecordWeight.toString(),
+                  value: widget.workoutModel.personalRecordWeight,
+                  callback: (value) => context
+                      .read<WorkoutListScreenCubit>()
+                      .updatePersonalRecord(widget.index, value),
                 ),
                 WorkoutCardDetailsWidget(
                   label: 'Recent weight',
-                  value: workoutModel.latestWeight.toString(),
+                  value: widget.workoutModel.latestWeight,
+                  callback: (value) => context
+                      .read<WorkoutListScreenCubit>()
+                      .updateLatestWeight(widget.index, value),
                 ),
                 WorkoutCardDetailsWidget(
                   label: 'Repetitions',
-                  value: workoutModel.repetitions.toString(),
+                  value: widget.workoutModel.repetitions,
+                  callback: (value) => context
+                      .read<WorkoutListScreenCubit>()
+                      .updateReps(widget.index, value),
                 ),
               ],
             ),
             const SizedBox(height: 8),
             Text('Notes:', style: TextStyle(fontWeight: FontWeight.bold)),
             TextField(
-              controller: TextEditingController(text: workoutModel.notes),
-              decoration: const InputDecoration(
+              controller: notesController,
+              onChanged: (value) => context
+                  .read<WorkoutListScreenCubit>()
+                  .updateNote(widget.index, value),
+              decoration: InputDecoration(
                 border: InputBorder.none,
                 isDense: true,
+                hintText: 'Add notes here...',
               ),
               maxLines: null,
             ),

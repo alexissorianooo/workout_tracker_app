@@ -7,6 +7,7 @@ part 'workout_model.g.dart';
 @freezed
 class WorkoutModel with _$WorkoutModel {
   const factory WorkoutModel({
+    int? id,
     required String name,
     required double latestWeight,
     required double personalRecordWeight,
@@ -14,16 +15,10 @@ class WorkoutModel with _$WorkoutModel {
     String? notes,
   }) = _WorkoutModel;
 
-  factory WorkoutModel.fromJson(Map<String, dynamic> json) =>
-      _$WorkoutModelFromJson(json);
+  factory WorkoutModel.fromJson(Map<String, dynamic> json) => _$WorkoutModelFromJson(json);
 
-  factory WorkoutModel.mock() => const WorkoutModel(
-    name: '',
-    latestWeight: 0,
-    personalRecordWeight: 0,
-    repetitions: 0,
-    notes: null,
-  );
+  factory WorkoutModel.mock() =>
+      const WorkoutModel(name: '', latestWeight: 0, personalRecordWeight: 0, repetitions: 0, notes: null);
 }
 
 /// Extension methods for WorkoutModel conversion
