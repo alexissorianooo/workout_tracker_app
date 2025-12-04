@@ -64,26 +64,7 @@ class _CardItemState extends State<CardItem> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              controller: nameController,
-              onChanged: (value) {
-                context.read<WorkoutListScreenCubit>().updateName(
-                      widget.index,
-                      value,
-                    );
-              },
-              maxLines: 1,
-              textAlign: TextAlign.start,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                isDense: true,
-                labelStyle: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            Text(widget.workoutModel.name),
             Divider(color: Colors.grey[300], thickness: 1),
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -91,17 +72,29 @@ class _CardItemState extends State<CardItem> {
                 WorkoutCardDetailsWidget(
                   label: 'PR',
                   value: widget.workoutModel.personalRecordWeight,
-                  callback: (value) => context.read<WorkoutListScreenCubit>().updatePersonalRecord(widget.index, value),
+                  callback: (value) => context.read<WorkoutListScreenCubit>().updatePersonalRecord(
+                        name: widget.workoutModel.name,
+                        index: widget.index,
+                        value: value,
+                      ),
                 ),
                 WorkoutCardDetailsWidget(
                   label: 'Recent weight',
                   value: widget.workoutModel.latestWeight,
-                  callback: (value) => context.read<WorkoutListScreenCubit>().updateLatestWeight(widget.index, value),
+                  callback: (value) => context.read<WorkoutListScreenCubit>().updateLatestWeight(
+                        name: widget.workoutModel.name,
+                        index: widget.index,
+                        value: value,
+                      ),
                 ),
                 WorkoutCardDetailsWidget(
                   label: 'Repetitions',
                   value: widget.workoutModel.repetitions,
-                  callback: (value) => context.read<WorkoutListScreenCubit>().updateReps(widget.index, value),
+                  callback: (value) => context.read<WorkoutListScreenCubit>().updateReps(
+                        name: widget.workoutModel.name,
+                        index: widget.index,
+                        value: value,
+                      ),
                 ),
               ],
             ),

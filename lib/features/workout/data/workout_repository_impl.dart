@@ -52,7 +52,7 @@ class WorkoutRepository implements IWorkoutRepository {
     print('workout $workout');
 
     if (workout == null) {
-      await addWorkout(workoutData);
+      // await addWorkout(workoutData);
       return;
     }
 

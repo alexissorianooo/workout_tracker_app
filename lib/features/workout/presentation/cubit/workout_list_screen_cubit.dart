@@ -40,6 +40,7 @@ class WorkoutListScreenCubit extends Cubit<WorkoutListScreenState> {
     emit(WorkoutListScreenState.loaded(workouts));
   }
 
+  // Currently not used; kept for reference
   Future<void> updateName(int index, String value) async {
     if (index >= 0 && index < workouts.length) {
       workouts[index] = workouts[index].copyWith(id: index + 1, name: value);
@@ -58,39 +59,47 @@ class WorkoutListScreenCubit extends Cubit<WorkoutListScreenState> {
     }
   }
 
-  Future<void> updatePersonalRecord(int index, double value) async {
-    if (index >= 0 && index < workouts.length) {
-      workouts[index] = workouts[index].copyWith(
-        id: index + 1,
-        personalRecordWeight: value,
-      );
-
-      await repository.updateWorkout(workouts[index]);
-      reloadCubit();
+  Future<void> updatePersonalRecord({
+    String? name,
+    int index = 0,
+    double value = 0,
+  }) async {
+    if (name == null) {
+      return;
     }
+    workouts.where((data) => data.name == name).forEach((specificWorkout) {
+      workouts[index] = specificWorkout.copyWith(personalRecordWeight: value);
+    });
+
+    await repository.updateWorkout(workouts[index]);
+    reloadCubit();
   }
 
-  Future<void> updateLatestWeight(int index, double value) async {
-    if (index >= 0 && index < workouts.length) {
-      workouts[index] = workouts[index].copyWith(
-        id: index + 1,
-        latestWeight: value,
-      );
-
-      await repository.updateWorkout(workouts[index]);
-      reloadCubit();
+  Future<void> updateLatestWeight({
+    String? name,
+    int index = 0,
+    double value = 0,
+  }) async {
+    if (name == null) {
+      return;
     }
+    workouts.where((data) => data.name == name).forEach((specificWorkout) {
+      workouts[index] = specificWorkout.copyWith(latestWeight: value);
+    });
+
+    await repository.updateWorkout(workouts[index]);
+    reloadCubit();
   }
 
-  Future<void> updateReps(int index, int value) async {
-    if (index >= 0 && index < workouts.length) {
-      workouts[index] = workouts[index].copyWith(
-        id: index + 1,
-        repetitions: value,
-      );
-
-      await repository.updateWorkout(workouts[index]);
-      reloadCubit();
+  Future<void> updateReps({String? name, int index = 0, int value = 0}) async {
+    if (name == null) {
+      return;
     }
+    workouts.where((data) => data.name == name).forEach((specificWorkout) {
+      workouts[index] = specificWorkout.copyWith(repetitions: value);
+    });
+
+    await repository.updateWorkout(workouts[index]);
+    reloadCubit();
   }
 }
