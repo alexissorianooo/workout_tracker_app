@@ -5,14 +5,7 @@ import 'package:isar_community/isar.dart';
 import 'package:workout_tracker/features/workout/data/isar_service.dart';
 import 'package:workout_tracker/features/workout/domain/workout_local_storage.dart';
 import 'package:workout_tracker/features/workout/domain/workout_model.dart';
-
-abstract class IWorkoutRepository {
-  Future<void> addProgram(Map<String, dynamic> programData); // grouping of workouts
-  Future<List<WorkoutModel?>> fetchWorkouts();
-  Future<void> addWorkout(WorkoutModel workoutData);
-  Future<void> updateWorkout(WorkoutModel workoutData);
-  Future<void> deleteAllWorkouts();
-}
+import 'package:workout_tracker/features/workout/domain/workout_repository.dart';
 
 @LazySingleton(as: IWorkoutRepository)
 class WorkoutRepository implements IWorkoutRepository {

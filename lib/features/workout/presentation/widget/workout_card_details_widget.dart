@@ -12,8 +12,7 @@ class WorkoutCardDetailsWidget extends StatefulWidget {
   });
 
   @override
-  State<WorkoutCardDetailsWidget> createState() =>
-      _WorkoutCardDetailsWidgetState();
+  State<WorkoutCardDetailsWidget> createState() => _WorkoutCardDetailsWidgetState();
 }
 
 class _WorkoutCardDetailsWidgetState extends State<WorkoutCardDetailsWidget> {

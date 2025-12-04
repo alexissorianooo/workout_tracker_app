@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../data/workout_repository.dart';
+import '../../domain/workout_repository.dart';
 import '../../domain/workout_model.dart';
 
 part 'workout_list_screen_state.dart';
@@ -60,7 +60,10 @@ class WorkoutListScreenCubit extends Cubit<WorkoutListScreenState> {
 
   Future<void> updatePersonalRecord(int index, double value) async {
     if (index >= 0 && index < workouts.length) {
-      workouts[index] = workouts[index].copyWith(id: index + 1, personalRecordWeight: value);
+      workouts[index] = workouts[index].copyWith(
+        id: index + 1,
+        personalRecordWeight: value,
+      );
 
       await repository.updateWorkout(workouts[index]);
       reloadCubit();
@@ -69,7 +72,10 @@ class WorkoutListScreenCubit extends Cubit<WorkoutListScreenState> {
 
   Future<void> updateLatestWeight(int index, double value) async {
     if (index >= 0 && index < workouts.length) {
-      workouts[index] = workouts[index].copyWith(id: index + 1, latestWeight: value);
+      workouts[index] = workouts[index].copyWith(
+        id: index + 1,
+        latestWeight: value,
+      );
 
       await repository.updateWorkout(workouts[index]);
       reloadCubit();
@@ -78,7 +84,10 @@ class WorkoutListScreenCubit extends Cubit<WorkoutListScreenState> {
 
   Future<void> updateReps(int index, int value) async {
     if (index >= 0 && index < workouts.length) {
-      workouts[index] = workouts[index].copyWith(id: index + 1, repetitions: value);
+      workouts[index] = workouts[index].copyWith(
+        id: index + 1,
+        repetitions: value,
+      );
 
       await repository.updateWorkout(workouts[index]);
       reloadCubit();

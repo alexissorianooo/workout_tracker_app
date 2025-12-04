@@ -68,9 +68,9 @@ class _CardItemState extends State<CardItem> {
               controller: nameController,
               onChanged: (value) {
                 context.read<WorkoutListScreenCubit>().updateName(
-                  widget.index,
-                  value,
-                );
+                      widget.index,
+                      value,
+                    );
               },
               maxLines: 1,
               textAlign: TextAlign.start,
@@ -91,23 +91,17 @@ class _CardItemState extends State<CardItem> {
                 WorkoutCardDetailsWidget(
                   label: 'PR',
                   value: widget.workoutModel.personalRecordWeight,
-                  callback: (value) => context
-                      .read<WorkoutListScreenCubit>()
-                      .updatePersonalRecord(widget.index, value),
+                  callback: (value) => context.read<WorkoutListScreenCubit>().updatePersonalRecord(widget.index, value),
                 ),
                 WorkoutCardDetailsWidget(
                   label: 'Recent weight',
                   value: widget.workoutModel.latestWeight,
-                  callback: (value) => context
-                      .read<WorkoutListScreenCubit>()
-                      .updateLatestWeight(widget.index, value),
+                  callback: (value) => context.read<WorkoutListScreenCubit>().updateLatestWeight(widget.index, value),
                 ),
                 WorkoutCardDetailsWidget(
                   label: 'Repetitions',
                   value: widget.workoutModel.repetitions,
-                  callback: (value) => context
-                      .read<WorkoutListScreenCubit>()
-                      .updateReps(widget.index, value),
+                  callback: (value) => context.read<WorkoutListScreenCubit>().updateReps(widget.index, value),
                 ),
               ],
             ),
@@ -115,9 +109,7 @@ class _CardItemState extends State<CardItem> {
             Text('Notes:', style: TextStyle(fontWeight: FontWeight.bold)),
             TextField(
               controller: notesController,
-              onChanged: (value) => context
-                  .read<WorkoutListScreenCubit>()
-                  .updateNote(widget.index, value),
+              onChanged: (value) => context.read<WorkoutListScreenCubit>().updateNote(widget.index, value),
               decoration: InputDecoration(
                 border: InputBorder.none,
                 isDense: true,
