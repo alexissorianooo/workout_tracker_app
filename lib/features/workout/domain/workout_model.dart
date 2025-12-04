@@ -17,8 +17,20 @@ class WorkoutModel with _$WorkoutModel {
 
   factory WorkoutModel.fromJson(Map<String, dynamic> json) => _$WorkoutModelFromJson(json);
 
-  factory WorkoutModel.mock() =>
-      const WorkoutModel(name: '', latestWeight: 0, personalRecordWeight: 0, repetitions: 0, notes: null);
+  factory WorkoutModel.mock({
+    String? name,
+    double? latestWeight,
+    double? personalRecordWeight,
+    int? repetitions,
+    String? notes,
+  }) =>
+      WorkoutModel(
+        name: name ?? '',
+        latestWeight: latestWeight ?? 0,
+        personalRecordWeight: personalRecordWeight ?? 0,
+        repetitions: repetitions ?? 0,
+        notes: notes,
+      );
 }
 
 /// Extension methods for WorkoutModel conversion
