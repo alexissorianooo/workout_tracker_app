@@ -34,10 +34,7 @@ class AppProviders extends StatelessWidget {
             // Unfocus any currently focused widget (dismisses keyboard)
             FocusScope.of(context).unfocus();
           },
-          child: Scaffold(
-            appBar: AppBar(title: const Text('Workout Tracker')),
-            body: const WorkoutListScreen(),
-          ),
+          child: WorkoutListScreen(),
         ),
         routes: {
           '/list': (context) => WorkoutListScreen(),

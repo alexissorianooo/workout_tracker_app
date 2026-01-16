@@ -9,35 +9,48 @@ class WorkoutListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<WorkoutListScreenCubit, WorkoutListScreenState>(
-      listener: (context, state) {
-        // Handle state changes
-      },
-      builder: (context, state) {
-        return state.maybeWhen(
-          loaded: (workouts) => ListView.builder(
-            itemCount: workouts.length,
-            itemBuilder: (context, index) {
-              final workout = workouts[index];
-              return WorkoutCardWidget(workout: workout, index: index);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Workout Tracker'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed('/add');
             },
+            child: Text('Edit workout'),
           ),
-          empty: () => Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('No workouts available'),
-                ElevatedButton(
-                  onPressed: () => Navigator.of(context).pushNamed('/add'),
-                  child: const Text('Edit'),
-                ),
-              ],
+        ],
+      ),
+      body: BlocConsumer<WorkoutListScreenCubit, WorkoutListScreenState>(
+        listener: (context, state) {
+          // Handle state changes
+        },
+        builder: (context, state) {
+          return state.maybeWhen(
+            loaded: (workouts) => ListView.builder(
+              itemCount: workouts.length,
+              itemBuilder: (context, index) {
+                final workout = workouts[index];
+                return WorkoutCardWidget(workout: workout, index: index);
+              },
             ),
-          ),
-          loading: () => const Center(child: CircularProgressIndicator()),
-          orElse: () => const SizedBox(),
-        );
-      },
+            empty: () => Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('No workouts available'),
+                  ElevatedButton(
+                    onPressed: () => Navigator.of(context).pushNamed('/add'),
+                    child: const Text('Edit'),
+                  ),
+                ],
+              ),
+            ),
+            loading: () => const Center(child: CircularProgressIndicator()),
+            orElse: () => const SizedBox(),
+          );
+        },
+      ),
     );
   }
 }
