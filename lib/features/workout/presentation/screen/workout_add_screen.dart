@@ -17,7 +17,6 @@ class _WorkoutAddScreenState extends State<WorkoutAddScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<WorkoutListScreenCubit>().createNewWorkout();
   }
 
   @override
@@ -33,6 +32,20 @@ class _WorkoutAddScreenState extends State<WorkoutAddScreen> {
                 Navigator.of(context).pop();
               },
             ),
+            actions: [
+              IconButton(
+                icon: SvgPicture.asset(AssetsEnum.backArrow),
+                onPressed: () {
+                  context.read<WorkoutListScreenCubit>().createNewWorkout();
+                },
+              ),
+              TextButton(
+                onPressed: () {
+                  context.read<WorkoutListScreenCubit>().deleteAllWorkouts();
+                },
+                child: const Text('reset'),
+              ),
+            ],
           ),
           body: state.maybeWhen(
             orElse: () => const SizedBox(),
@@ -46,18 +59,21 @@ class _WorkoutAddScreenState extends State<WorkoutAddScreen> {
                     return WorkoutCardWidget(workout: workout, index: index);
                   }
                   // Show the "Add Workout" button as the last item
-                  else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // Add your logic to create a new workout
-                          context.read<WorkoutListScreenCubit>().createNewWorkout();
-                        },
-                        child: const Text('Add Workout'),
-                      ),
-                    );
-                  }
+                  // else {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 8.0,
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Add your logic to create a new workout
+                        context.read<WorkoutListScreenCubit>().createNewWorkout();
+                      },
+                      child: const Text('Add another workout'),
+                    ),
+                  );
+                  // }
                 },
               );
             },

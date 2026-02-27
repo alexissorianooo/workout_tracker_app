@@ -27,8 +27,14 @@ class WorkoutListScreenCubit extends Cubit<WorkoutListScreenState> {
     reloadCubit();
   }
 
+  Future<void> deleteAllWorkouts() async {
+    await repository.deleteAllWorkouts();
+    workouts.clear();
+    emit(const WorkoutListScreenState.empty());
+  }
+
   Future<void> initialize() async {
-    // repository.deleteAllWorkouts();
+    repository.deleteAllWorkouts();
     final fetchedWorkouts = await repository.fetchWorkouts();
     if (fetchedWorkouts.isEmpty) {
       emit(const WorkoutListScreenState.empty());
