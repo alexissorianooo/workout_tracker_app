@@ -10,16 +10,17 @@ class WorkoutListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Workout Tracker'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed('/add');
-            },
-            child: Text('Edit workout'),
+      appBar: AppBar(title: const Text('Workout Tracker')),
+      floatingActionButton: Container(
+        width: 50,
+        height: 50,
+        color: Colors.amberAccent,
+        child: Center(
+          child: GestureDetector(
+            onTap: () => Navigator.of(context).pushNamed('/add'),
+            child: Text('Edit'),
           ),
-        ],
+        ),
       ),
       body: BlocConsumer<WorkoutListScreenCubit, WorkoutListScreenState>(
         listener: (context, state) {
