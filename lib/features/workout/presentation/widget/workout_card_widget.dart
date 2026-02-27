@@ -64,7 +64,16 @@ class _CardItemState extends State<CardItem> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.workoutModel.name),
+            TextField(
+              controller: nameController,
+              onChanged: (value) => context.read<WorkoutListScreenCubit>().updateName(widget.index, value),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                isDense: true,
+                hintText: 'Workout #${widget.index + 1}',
+              ),
+              maxLines: null,
+            ),
             Divider(color: Colors.grey[300], thickness: 1),
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
